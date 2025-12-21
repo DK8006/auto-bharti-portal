@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharti Details</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f3f4f6}
+header{background:#020617;color:#fff;padding:15px;text-align:center}
+.container{padding:15px}
+.card{background:#fff;padding:15px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.tag{display:inline-block;padding:4px 8px;border-radius:4px;color:#fff;font-size:12px}
+.gov{background:#16a34a}
+.private{background:#2563eb}
+.samvida{background:#dc2626}
+.btn{display:inline-block;margin-top:10px;padding:10px 14px;background:#020617;color:#fff;text-decoration:none;border-radius:6px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Bharti Details</h1>
+</header>
+
+<div class="container" id="jobBox"></div>
+
+<script>
+// SAME DATA (later automation JSON se aayega)
+const jobs = [
+ {
+  id:"UPP01",
+  title_hi:"UP Police Constable Bharti 2025",
+  title_en:"UP Police Constable Recruitment 2025",
+  type:"gov",
+  qualification:"12th Pass",
+  age:"18-25",
+  salary:"₹21,700 – 69,100",
+  lastDate:"2025-02-10",
+  apply:"https://uppbpb.gov.in",
+  details_hi:"उत्तर प्रदेश पुलिस में कांस्टेबल पदों पर भर्ती।",
+  details_en:"Recruitment for Constable posts in UP Police."
+ },
+ {
+  id:"NHM02",
+  title_hi:"NHM संविदा भर्ती",
+  title_en:"NHM Contract Recruitment",
+  type:"samvida",
+  qualification:"Diploma / Degree",
+  age:"21-40",
+  salary:"₹15,000 – 25,000",
+  lastDate:"2025-02-05",
+  apply:"https://nhm.gov.in",
+  details_hi:"राष्ट्रीय स्वास्थ्य मिशन के अंतर्गत संविदा भर्ती।",
+  details_en:"Contract recruitment under NHM."
+ },
+ {
+  id:"PVT03",
+  title_hi:"Private Factory Helper Job",
+  title_en:"Private Factory Helper Job",
+  type:"private",
+  qualification:"10th Pass",
+  age:"18-35",
+  salary:"₹12,000 – 18,000",
+  lastDate:"2025-03-01",
+  apply:"https://example.com",
+  details_hi:"प्राइवेट फैक्ट्री में हेल्पर की आवश्यकता।",
+  details_en:"Helper required in private factory."
+ }
+];
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const job = jobs.find(j=>j.id===id);
+const box = document.getElementById("jobBox");
+
+if(!job){
+ box.innerHTML="<p>Bharti not found.</p>";
+}else{
+ box.innerHTML = `
+  <div class="card">
+   <h2>${job.title_hi}</h2>
+   <h4>${job.title_en}</h4>
+   <span class="tag ${job.type}">${job.type.toUpperCase()}</span>
+   <p><b>Qualification:</b> ${job.qualification}</p>
+   <p><b>Age:</b> ${job.age}</p>
+   <p><b>Salary:</b> ${job.salary}</p>
+   <p><b>Last Date:</b> ${job.lastDate}</p>
+   <p>${job.details_hi}</p>
+   <p>${job.details_en}</p>
+   <a class="btn" href="${job.apply}" target="_blank">Apply Now</a>
+  </div>
+ `;
+}
+</script>
+
+</body>
+</html>

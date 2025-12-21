@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All India Bharti Portal | Govt | Private | Samvida</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f3f4f6}
+header{background:#020617;color:#fff;padding:15px;text-align:center}
+.container{padding:15px}
+.card{background:#fff;padding:15px;margin-bottom:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.tag{display:inline-block;padding:4px 8px;border-radius:4px;color:#fff;font-size:12px}
+.gov{background:#16a34a}
+.private{background:#2563eb}
+.samvida{background:#dc2626}
+.btn{display:inline-block;margin-top:8px;padding:8px 12px;background:#020617;color:#fff;text-decoration:none;border-radius:5px}
+footer{text-align:center;background:#020617;color:#fff;padding:10px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>All India Bharti Portal</h1>
+<p>Government | Private | Samvida • Hindi + English</p>
+</header>
+
+<div class="container" id="jobList"></div>
+
+<footer>
+<p>© 2025 Auto Bharti System</p>
+</footer>
+
+<script>
+// ===== JOB DATA (automation-ready) =====
+const jobs = [
+ {
+  id:"UPP01",
+  title_hi:"UP Police Constable Bharti 2025",
+  title_en:"UP Police Constable Recruitment 2025",
+  type:"gov",
+  lastDate:"2025-02-10"
+ },
+ {
+  id:"NHM02",
+  title_hi:"NHM संविदा भर्ती",
+  title_en:"NHM Contract Recruitment",
+  type:"samvida",
+  lastDate:"2025-02-05"
+ },
+ {
+  id:"PVT03",
+  title_hi:"Private Factory Helper Job",
+  title_en:"Private Factory Helper Job",
+  type:"private",
+  lastDate:"2025-03-01"
+ }
+];
+
+const today = new Date().toISOString().split("T")[0];
+const list = document.getElementById("jobList");
+
+jobs.filter(j=>j.lastDate>=today).forEach(j=>{
+ list.innerHTML += `
+  <div class="card">
+   <h3>${j.title_hi}</h3>
+   <p>${j.title_en}</p>
+   <span class="tag ${j.type}">${j.type.toUpperCase()}</span>
+   <p><b>Last Date:</b> ${j.lastDate}</p>
+   <a class="btn" href="job.html?id=${j.id}">View Details</a>
+  </div>
+ `;
+});
+</script>
+
+</body>
+</html>
