@@ -72,7 +72,7 @@ const jobs = [
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-const job = jobs.find(j=>j.id===id);
+const job = jobs.find(j=>j.id==id);
 const box = document.getElementById("jobBox");
 
 if(!job){
@@ -96,4 +96,5 @@ if(!job){
 </script>
 
 </body>
+
 </html>
