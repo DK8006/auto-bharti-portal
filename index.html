@@ -2,77 +2,69 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All India Bharti Portal | Govt | Private | Samvida</title>
-
+<title>UP Bharti Portal | Auto Update</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:Arial;margin:0;background:#f3f4f6}
-header{background:#020617;color:#fff;padding:15px;text-align:center}
+body{font-family:Arial;background:#f4f6f8;margin:0}
+header{background:#0b5ed7;color:#fff;padding:15px;text-align:center}
 .container{padding:15px}
-.card{background:#fff;padding:15px;margin-bottom:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-.tag{display:inline-block;padding:4px 8px;border-radius:4px;color:#fff;font-size:12px}
-.gov{background:#16a34a}
-.private{background:#2563eb}
-.samvida{background:#dc2626}
-.btn{display:inline-block;margin-top:8px;padding:8px 12px;background:#020617;color:#fff;text-decoration:none;border-radius:5px}
-footer{text-align:center;background:#020617;color:#fff;padding:10px}
+.job{background:#fff;margin-bottom:10px;padding:12px;border-radius:6px}
+.job h3{margin:0 0 5px}
+.tag{font-size:12px;padding:2px 6px;border-radius:4px;background:#198754;color:#fff}
+.btn{display:inline-block;margin-top:6px;padding:6px 10px;background:#0b5ed7;color:#fff;text-decoration:none;border-radius:4px}
+.lang{float:right}
 </style>
 </head>
 
 <body>
-
 <header>
-<h1>All India Bharti Portal</h1>
-<p>Government | Private | Samvida • Hindi + English</p>
+  <span class="lang">
+    <button onclick="setLang('hi')">हिंदी</button>
+    <button onclick="setLang('en')">English</button>
+  </span>
+  <h2 id="title">उत्तर प्रदेश भर्ती पोर्टल</h2>
+  <p id="subtitle">सरकारी • प्राइवेट • संविदा | Auto Update</p>
 </header>
 
-<div class="container" id="jobList"></div>
-
-<footer>
-<p>© 2025 Auto Bharti System</p>
-</footer>
+<div class="container" id="jobs"></div>
 
 <script>
-// ===== JOB DATA (automation-ready) =====
-const jobs = [
- {
-  id:"UPP01",
-  title_hi:"UP Police Constable Bharti 2025",
-  title_en:"UP Police Constable Recruitment 2025",
-  type:"gov",
-  lastDate:"2025-02-10"
- },
- {
-  id:"NHM02",
-  title_hi:"NHM संविदा भर्ती",
-  title_en:"NHM Contract Recruitment",
-  type:"samvida",
-  lastDate:"2025-02-05"
- },
- {
-  id:"PVT03",
-  title_hi:"Private Factory Helper Job",
-  title_en:"Private Factory Helper Job",
-  type:"private",
-  lastDate:"2025-03-01"
- }
-];
+let currentLang = 'hi';
 
-const today = new Date().toISOString().split("T")[0];
-const list = document.getElementById("jobList");
+function setLang(l){
+  currentLang = l;
+  document.getElementById('title').innerText =
+    l==='hi' ? 'उत्तर प्रदेश भर्ती पोर्टल' : 'UP Recruitment Portal';
+  document.getElementById('subtitle').innerText =
+    l==='hi' ? 'सरकारी • प्राइवेट • संविदा | Auto Update' :
+               'Government • Private • Contract | Auto Update';
+  loadJobs();
+}
 
-jobs.filter(j=>j.lastDate>=today).forEach(j=>{
- list.innerHTML += `
-  <div class="card">
-   <h3>${j.title_hi}</h3>
-   <p>${j.title_en}</p>
-   <span class="tag ${j.type}">${j.type.toUpperCase()}</span>
-   <p><b>Last Date:</b> ${j.lastDate}</p>
-   <a class="btn" href="job.html?id=${j.id}">View Details</a>
-  </div>
- `;
-});
+async function loadJobs(){
+  const res = await fetch('jobs.json');
+  const data = await res.json();
+  const today = new Date().toISOString().split('T')[0];
+  let html = '';
+
+  data.forEach(j=>{
+    if(j.last_date >= today){
+      html += `
+      <div class="job">
+        <span class="tag">${j.type}</span>
+        <h3>${currentLang==='hi'?j.title_hi:j.title_en}</h3>
+        <p>Last Date: ${j.last_date}</p>
+        <a class="btn" href="${j.details}">Details</a>
+        <a class="btn" href="${j.apply_link}" target="_blank">Apply</a>
+      </div>`;
+    }
+  });
+
+  document.getElementById('jobs').innerHTML = html || 
+   (currentLang==='hi'?'कोई नई भर्ती नहीं':'No active jobs');
+}
+
+loadJobs();
 </script>
-
 </body>
 </html>
