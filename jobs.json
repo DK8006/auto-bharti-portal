@@ -1,12 +1,20 @@
 [
   {
-    "id": "up-police-constable-2025",
+    "id": "up-police-2025",
     "title_hi": "यूपी पुलिस कांस्टेबल भर्ती 2025",
     "title_en": "UP Police Constable Recruitment 2025",
     "type": "Government",
-    "state": "Uttar Pradesh",
-    "last_date": "2025-03-15",
-    "apply_link": "https://uppbpb.gov.in",
-    "details": "job.html?id=up-police-constable-2025"
+    "last_date": "2025-12-31",
+    "details": "up-police-constable.html",
+    "apply_link": "https://uppbpb.gov.in"
+  },
+  {
+    "id": "private-helper",
+    "title_hi": "प्राइवेट ऑफिस हेल्पर भर्ती",
+    "title_en": "Private Office Helper Job",
+    "type": "Private",
+    "last_date": "2025-11-30",
+    "details": "private-helper.html",
+    "apply_link": "https://example.com/apply"
   }
 ]
