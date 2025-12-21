@@ -2,69 +2,50 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<title>UP Bharti Portal | Auto Update</title>
+<title>UP Bharti Portal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:Arial;background:#f4f6f8;margin:0}
-header{background:#0b5ed7;color:#fff;padding:15px;text-align:center}
+body{font-family:Arial;background:#f2f2f2;margin:0}
+header{background:#0d6efd;color:#fff;padding:15px;text-align:center}
 .container{padding:15px}
 .job{background:#fff;margin-bottom:10px;padding:12px;border-radius:6px}
-.job h3{margin:0 0 5px}
-.tag{font-size:12px;padding:2px 6px;border-radius:4px;background:#198754;color:#fff}
-.btn{display:inline-block;margin-top:6px;padding:6px 10px;background:#0b5ed7;color:#fff;text-decoration:none;border-radius:4px}
-.lang{float:right}
+.tag{display:inline-block;background:#198754;color:#fff;padding:2px 6px;border-radius:4px;font-size:12px}
+.btn{display:inline-block;margin-top:6px;margin-right:5px;padding:6px 10px;background:#0d6efd;color:#fff;text-decoration:none;border-radius:4px}
 </style>
 </head>
 
 <body>
 <header>
-  <span class="lang">
-    <button onclick="setLang('hi')">हिंदी</button>
-    <button onclick="setLang('en')">English</button>
-  </span>
-  <h2 id="title">उत्तर प्रदेश भर्ती पोर्टल</h2>
-  <p id="subtitle">सरकारी • प्राइवेट • संविदा | Auto Update</p>
+<h2>उत्तर प्रदेश भर्ती पोर्टल</h2>
+<p>सरकारी • प्राइवेट • संविदा</p>
 </header>
 
-<div class="container" id="jobs"></div>
+<div class="container" id="jobs">Loading...</div>
 
 <script>
-let currentLang = 'hi';
-
-function setLang(l){
-  currentLang = l;
-  document.getElementById('title').innerText =
-    l==='hi' ? 'उत्तर प्रदेश भर्ती पोर्टल' : 'UP Recruitment Portal';
-  document.getElementById('subtitle').innerText =
-    l==='hi' ? 'सरकारी • प्राइवेट • संविदा | Auto Update' :
-               'Government • Private • Contract | Auto Update';
-  loadJobs();
-}
-
-async function loadJobs(){
-  const res = await fetch('jobs.json');
-  const data = await res.json();
+fetch('jobs.json')
+.then(res => res.json())
+.then(data => {
   const today = new Date().toISOString().split('T')[0];
   let html = '';
-
-  data.forEach(j=>{
+  data.forEach(j => {
     if(j.last_date >= today){
       html += `
       <div class="job">
         <span class="tag">${j.type}</span>
-        <h3>${currentLang==='hi'?j.title_hi:j.title_en}</h3>
+        <h3>${j.title_hi}</h3>
         <p>Last Date: ${j.last_date}</p>
         <a class="btn" href="${j.details}">Details</a>
         <a class="btn" href="${j.apply_link}" target="_blank">Apply</a>
       </div>`;
     }
   });
-
-  document.getElementById('jobs').innerHTML = html || 
-   (currentLang==='hi'?'कोई नई भर्ती नहीं':'No active jobs');
-}
-
-loadJobs();
+  document.getElementById('jobs').innerHTML = html || 'कोई नई भर्ती नहीं';
+})
+.catch(() => {
+  document.getElementById('jobs').innerHTML = 'Data load error';
+});
 </script>
+
 </body>
 </html>
