@@ -1,0 +1,27 @@
+[
+  {
+    "name": "UP Police",
+    "type": "government",
+    "url": "https://uppbpb.gov.in"
+  },
+  {
+    "name": "UPSSSC",
+    "type": "government",
+    "url": "https://upsssc.gov.in"
+  },
+  {
+    "name": "SSC",
+    "type": "government",
+    "url": "https://ssc.nic.in"
+  },
+  {
+    "name": "Railway",
+    "type": "government",
+    "url": "https://indianrailways.gov.in"
+  },
+  {
+    "name": "Private Jobs",
+    "type": "private",
+    "url": "https://www.naukri.com"
+  }
+]
