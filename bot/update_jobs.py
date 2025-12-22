@@ -1,56 +1,65 @@
 import json
-import requests
-from datetime import date
+from datetime import datetime
 
-# Demo source (future me real site add karenge)
-SOURCE_URL = "https://example.com/jobs.json"
+JOBS_FILE = "jobs.json"
+SOURCES_FILE = "bot/sources.json"
 
-LOCAL_FILE = "jobs.json"
-
-def load_local_jobs():
+def load_json(path, default):
     try:
-        with open(LOCAL_FILE, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except:
-        return []
+        return default
 
-def save_jobs(jobs):
-    with open(LOCAL_FILE, "w", encoding="utf-8") as f:
-        json.dump(jobs, f, ensure_ascii=False, indent=2)
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
 
-def fetch_new_jobs():
-    # Abhi demo job (auto add example)
-    return [{
-        "id": str(int(date.today().strftime("%Y%m%d"))),
-        "title_hi": "नई प्राइवेट भर्ती",
-        "title_en": "New Private Job",
-        "type": "private",
-        "qualification": "10th Pass",
-        "age": "18-35",
-        "salary": "₹15,000 - 20,000",
-        "lastDate": str(date.today()),
-        "apply": "https://example.com",
-        "details_hi": "नई भर्ती अपने आप जुड़ गई है",
-        "details_en": "This job was auto added"
-    }]
+def remove_expired(jobs):
+    today = datetime.today().strftime("%Y-%m-%d")
+    return [j for j in jobs if j.get("lastDate", today) >= today]
+
+def generate_demo_jobs(sources):
+    jobs = []
+    today = datetime.today().strftime("%Y-%m-%d")
+
+    for src in sources:
+        jid = f"{src['name'].lower().replace(' ','-')}-{today}"
+        jobs.append({
+            "id": jid,
+            "title_hi": f"{src['name']} नई भर्ती",
+            "title_en": f"{src['name']} New Recruitment",
+            "type": src["type"],
+            "qualification": "10th / 12th / Graduate",
+            "age": "18-35",
+            "salary": "As per rules",
+            "lastDate": today,
+            "apply": src["url"],
+            "details_hi": f"{src['name']} से नई भर्ती auto add हुई है",
+            "details_en": f"Auto-added job from {src['name']}"
+        })
+    return jobs
 
 def main():
-    local_jobs = load_local_jobs()
-    new_jobs = fetch_new_jobs()
+    jobs = load_json(JOBS_FILE, [])
+    sources = load_json(SOURCES_FILE, [])
 
-    ids = {job["id"] for job in local_jobs}
+    jobs = remove_expired(jobs)
+    existing_ids = {j["id"] for j in jobs}
+
+    new_jobs = generate_demo_jobs(sources)
 
     added = False
-    for job in new_jobs:
-        if job["id"] not in ids:
-            local_jobs.append(job)
+    for j in new_jobs:
+        if j["id"] not in existing_ids:
+            jobs.append(j)
             added = True
 
     if added:
-        save_jobs(local_jobs)
-        print("New job added")
+        save_json(JOBS_FILE, jobs)
+        print("Jobs updated from sources")
     else:
-        print("No new job found")
+        print("No new jobs found")
 
 if __name__ == "__main__":
     main()
