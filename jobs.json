@@ -16,5 +16,18 @@
     "last_date": "2025-11-30",
     "details": "private-helper.html",
     "apply_link": "https://example.com/apply"
+  },
+  {
+    "id": "20251222",
+    "title_hi": "नई प्राइवेट भर्ती",
+    "title_en": "New Private Job",
+    "type": "private",
+    "qualification": "10th Pass",
+    "age": "18-35",
+    "salary": "₹15,000 - 20,000",
+    "lastDate": "2025-12-22",
+    "apply": "https://example.com",
+    "details_hi": "नई भर्ती अपने आप जुड़ गई है",
+    "details_en": "This job was auto added"
   }
 ]
