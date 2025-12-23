@@ -1,10 +1,15 @@
 import json
-import requests
-from bs4 import BeautifulSoup
+import feedparser
 from datetime import datetime
-import time
 
 JOBS_FILE = "jobs.json"
+
+RSS_SOURCES = [
+    {
+        "name": "Employment News",
+        "url": "https://www.employmentnews.gov.in/NewEmp/RSS.xml"
+    }
+]
 
 def load_jobs():
     try:
@@ -20,50 +25,35 @@ def save_jobs(jobs):
 def job_exists(jobs, title):
     return any(title.lower() == job["title"].lower() for job in jobs)
 
-def fetch_freejobalert():
-    collected = []
-    base_url = "https://www.freejobalert.com/latest-notifications/page/"
-
-    for page in range(1, 4):  # 3 pages = ~15 jobs
-        try:
-            r = requests.get(base_url + str(page), timeout=20)
-            soup = BeautifulSoup(r.text, "html.parser")
-            rows = soup.select("table tbody tr")
-
-            for row in rows:
-                cols = row.find_all("td")
-                if len(cols) >= 3:
-                    title = cols[0].get_text(strip=True)
-                    link = cols[0].find("a")["href"]
-
-                    collected.append({
-                        "id": int(datetime.now().timestamp() * 1000),
-                        "title": title,
-                        "type": "Government",
-                        "mode": "Online",
-                        "location": "India",
-                        "lastDate": "Check Notification",
-                        "details": "Auto fetched (no captcha source)",
-                        "applyLink": link
-                    })
-            time.sleep(2)
-        except:
-            continue
-
-    return collected
+def fetch_from_rss():
+    jobs = []
+    for src in RSS_SOURCES:
+        feed = feedparser.parse(src["url"])
+        for entry in feed.entries[:10]:
+            jobs.append({
+                "id": int(datetime.now().timestamp() * 1000),
+                "title": entry.title,
+                "type": "Government",
+                "mode": "Online",
+                "location": "India",
+                "lastDate": "Check Notification",
+                "details": entry.summary if "summary" in entry else "Official RSS source",
+                "applyLink": entry.link
+            })
+    return jobs
 
 def main():
-    jobs = load_jobs()
-    new_jobs = fetch_freejobalert()
-    added = 0
+    existing_jobs = load_jobs()
+    new_jobs = fetch_from_rss()
 
+    added = 0
     for job in new_jobs:
-        if not job_exists(jobs, job["title"]):
-            jobs.append(job)
+        if not job_exists(existing_jobs, job["title"]):
+            existing_jobs.append(job)
             added += 1
 
     if added > 0:
-        save_jobs(jobs)
+        save_jobs(existing_jobs)
 
 if __name__ == "__main__":
     main()
