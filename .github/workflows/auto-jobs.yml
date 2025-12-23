@@ -1,0 +1,31 @@
+name: Auto Update Jobs
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run job fetcher
+        run: python scripts/fetch_jobs.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "auto-bot"
+          git config user.email "bot@github.com"
+          git add jobs.json
+          git commit -m "auto update jobs" || echo "No changes"
+          git push
