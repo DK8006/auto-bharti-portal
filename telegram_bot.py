@@ -23,6 +23,7 @@ def clean(text):
     return re.sub(r"\s+", " ", text).strip()
 
 async def main():
+    await client.start()
     jobs = []
     if os.path.exists("jobs.json"):
         jobs = json.load(open("jobs.json", "r", encoding="utf-8"))
