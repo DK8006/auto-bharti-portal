@@ -34,7 +34,7 @@ async def main():
             entity = await client.get_entity(ch)
             history = await client(GetHistoryRequest(
                 peer=entity,
-                limit=20,
+                limit=100,
                 offset_date=None,
                 offset_id=0,
                 max_id=0,
