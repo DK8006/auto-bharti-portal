@@ -1,33 +1,38 @@
-name: Auto Update Jobs
+name: Auto Update Jobs from Telegram
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # Roz subah 6 baje (UTC)
-  workflow_dispatch:     # Manual run ke liye
+    - cron: "0 */6 * * *"   # har 6 ghante
+  workflow_dispatch:
 
 jobs:
-  fetch-jobs:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.11"
 
-      - name: Install dependencies
-        run: pip install feedparser
-
-      - name: Run job fetch bot
-        run: python scripts/fetch_jobs.py
-
-      - name: Commit and push changes
+      - name: Install libraries
         run: |
-          git config user.name "auto-job-bot"
-          git config user.email "bot@github.com"
+          pip install telethon requests beautifulsoup4
+
+      - name: Run Telegram Job Bot
+        env:
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+        run: |
+          python telegram_bot.py
+
+      - name: Commit & Push Updates
+        run: |
+          git config --global user.name "job-bot"
+          git config --global user.email "bot@github.com"
           git add jobs.json
-          git commit -m "auto update jobs via rss" || echo "No changes to commit"
+          git commit -m "Auto update jobs" || echo "No changes"
           git push
