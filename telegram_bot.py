@@ -49,8 +49,8 @@ async def main():
                     continue
                 text = clean(msg.message)
 
-                if "apply" in text.lower() or "भर्ती" in text:
-                    title = text[:80]
+                if any(word in text.lower() for word in ["apply", "bharti", "vacancy", "recruitment", "job", "भर्ती", "नौकरी"]):
+                    title = text.split("\n")[0][:120]
                     if title in titles:
                         continue
 
