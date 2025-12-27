@@ -2,7 +2,7 @@ import json, os, re
 from telethon import TelegramClient
 from telethon.tl.functions.messages import GetHistoryRequest
 
-API_ID = int(os.getenv("TG_API_ID"))
+API_ID = int(os.getenv("TG_API_ID","0"))
 API_HASH = os.getenv("TG_API_HASH")
 
 CHANNELS = [
