@@ -1,73 +1,63 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>Auto Bharti Portal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Bharti Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body{font-family:Arial;background:#f2f2f2;margin:0}
-    header{background:#0d6efd;color:#fff;padding:15px;text-align:center}
-    .container{padding:15px}
-    .job{background:#fff;padding:12px;margin-bottom:12px;border-radius:6px}
-    .dept{font-size:13px;color:#0d6efd;font-weight:bold}
-    .btn{
-      display:inline-block;
-      padding:6px 10px;
-      margin-top:6px;
-      margin-right:6px;
-      background:#198754;
-      color:#fff;
-      text-decoration:none;
-      border-radius:4px;
-      font-size:13px;
-    }
-    .btn.secondary{background:#0d6efd}
-  </style>
+<style>
+body{margin:0;font-family:Arial;background:#f2f2f2}
+header{background:#0d6efd;color:white;padding:12px;text-align:center}
+select{width:95%;padding:8px;margin:10px}
+.job{background:white;margin:10px;padding:10px;border-radius:6px}
+.job h3{margin:0 0 6px 0}
+.job a{display:inline-block;margin-top:6px;color:#0d6efd}
+</style>
 </head>
 
 <body>
+
 <header>
-  <h2>सरकारी भर्तियाँ (Latest)</h2>
-  <p>Real Notification Based Jobs</p>
+  <h2>Latest Bharti</h2>
 </header>
 
-<div class="container" id="jobs">Loading...</div>
+<select id="deptFilter">
+  <option value="">All Department</option>
+  <option value="SSC">SSC</option>
+  <option value="Railway">Railway</option>
+  <option value="Police">Police</option>
+</select>
+
+<div id="jobs">Loading...</div>
 
 <script>
-fetch('jobs.json')
+const jobsDiv = document.getElementById("jobs");
+const filter = document.getElementById("deptFilter");
+
+fetch("jobs.json")
 .then(res => res.json())
 .then(data => {
-  const today = new Date().toISOString().split('T')[0];
-  let html = '';
+  function showJobs(){
+    let html = "";
+    let dept = filter.value;
 
-  data.forEach(j => {
-    if(j.last_date >= today){
-      html += `
+    data.forEach(j => {
+      if(!dept || j.department.includes(dept)){
+        html += `
         <div class="job">
-          <div class="dept">${j.department}</div>
           <h3>${j.exam_name}</h3>
-          <p><b>Post:</b> ${j.posts}</p>
+          <p><b>Department:</b> ${j.department}</p>
           <p><b>Last Date:</b> ${j.last_date}</p>
-          <p><b>Age:</b> ${j.age_limit}</p>
-          <p><b>Fees:</b> ${j.fees}</p>
+          <a href="job.html?id=${j.id}">View Full Details</a>
+        </div>`;
+      }
+    });
 
-          <a class="btn secondary" href="${j.notification_link}" target="_blank">
-            Notification
-          </a>
-          <a class="btn" href="${j.apply_link}" target="_blank">
-            Apply Online
-          </a>
-        </div>
-      `;
-    }
-  });
+    jobsDiv.innerHTML = html || "No jobs available";
+  }
 
-  document.getElementById('jobs').innerHTML =
-    html || 'कोई नई भर्ती उपलब्ध नहीं है';
-})
-.catch(()=>{
-  document.getElementById('jobs').innerHTML = 'Data load error';
+  filter.onchange = showJobs;
+  showJobs();
 });
 </script>
 
