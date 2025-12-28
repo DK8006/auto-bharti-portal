@@ -1,46 +1,46 @@
 [
   {
     "id": 1,
-    "exam_name": "SSC GD Constable 2025",
-    "department": "SSC",
-    "last_date": "2025-02-10",
-    "apply_link": "https://ssc.nic.in",
-    "age_limit": "18-23 Years",
-    "fees": "General/OBC ₹100, SC/ST Free",
-    "qualification": "10th Pass",
-    "syllabus": "General Knowledge, Maths, Reasoning, Hindi"
+    "exam_name": "UP Police Outsourcing Driver Bharti 2025",
+    "department": "Outsourcing",
+    "last_date": "2025-02-20",
+    "age_limit": "18-45 Years",
+    "fees": "No Fees",
+    "qualification": "8th / Driving License",
+    "syllabus": "Interview / Document Verification",
+    "apply_link": "https://sewayojan.up.nic.in/IEP/Login.aspx"
   },
   {
     "id": 2,
-    "exam_name": "SSC CHSL 2025",
+    "exam_name": "SSC GD Constable 2025",
     "department": "SSC",
-    "last_date": "2025-03-01",
-    "apply_link": "https://ssc.nic.in",
-    "age_limit": "18-27 Years",
-    "fees": "₹100 (SC/ST/Female Free)",
-    "qualification": "12th Pass",
-    "syllabus": "GK, Maths, Reasoning, English"
+    "last_date": "2025-02-10",
+    "age_limit": "18-23 Years",
+    "fees": "General/OBC ₹100, SC/ST Free",
+    "qualification": "10th Pass",
+    "syllabus": "GK, Maths, Reasoning",
+    "apply_link": "https://ssc.nic.in/Portal/Apply"
   },
   {
     "id": 3,
-    "exam_name": "Railway Group D",
+    "exam_name": "Railway Group D 2025",
     "department": "Railway",
     "last_date": "2025-01-28",
-    "apply_link": "https://rrbcdg.gov.in",
     "age_limit": "18-33 Years",
     "fees": "₹500 (SC/ST ₹250)",
     "qualification": "10th / ITI",
-    "syllabus": "Maths, Reasoning, Science, GK"
+    "syllabus": "Maths, Reasoning, Science",
+    "apply_link": "https://www.rrbapply.gov.in"
   },
   {
     "id": 4,
-    "exam_name": "UP Police Constable",
-    "department": "Police",
-    "last_date": "2025-02-15",
-    "apply_link": "https://uppbpb.gov.in",
-    "age_limit": "18-22 Years",
-    "fees": "₹400",
-    "qualification": "12th Pass",
-    "syllabus": "GK, Reasoning, Hindi"
+    "exam_name": "UP NHM Contract Staff Bharti",
+    "department": "Outsourcing",
+    "last_date": "2025-02-05",
+    "age_limit": "21-40 Years",
+    "fees": "No Fees",
+    "qualification": "ANM / GNM / Graduate",
+    "syllabus": "Merit Based",
+    "apply_link": "https://upnrhm.gov.in/Home/Notice"
   }
 ]
