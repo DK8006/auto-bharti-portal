@@ -23,7 +23,16 @@ def clean(text):
     return re.sub(r"\s+", " ", text).strip()
 
 async def main():
-    await client.start()
+    BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise ValueError("TG_BOT_TOKEN missing")
+
+client = TelegramClient(
+    "jobbot",
+    API_ID,
+    API_HASH
+).start(bot_token=BOT_TOKEN)
     jobs = []
     if os.path.exists("jobs.json"):
         jobs = json.load(open("jobs.json", "r", encoding="utf-8"))
