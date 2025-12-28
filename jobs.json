@@ -42,5 +42,70 @@
     "qualification": "ANM / GNM / Graduate",
     "syllabus": "Merit Based",
     "apply_link": "https://upnrhm.gov.in/Home/Notice"
+  },
+  {
+    "id": "up-police-2025-12-28",
+    "title_hi": "UP Police नई भर्ती",
+    "title_en": "UP Police New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-28",
+    "apply": "https://uppbpb.gov.in",
+    "details_hi": "UP Police से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from UP Police"
+  },
+  {
+    "id": "upsssc-2025-12-28",
+    "title_hi": "UPSSSC नई भर्ती",
+    "title_en": "UPSSSC New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-28",
+    "apply": "https://upsssc.gov.in",
+    "details_hi": "UPSSSC से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from UPSSSC"
+  },
+  {
+    "id": "ssc-2025-12-28",
+    "title_hi": "SSC नई भर्ती",
+    "title_en": "SSC New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-28",
+    "apply": "https://ssc.nic.in",
+    "details_hi": "SSC से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from SSC"
+  },
+  {
+    "id": "railway-2025-12-28",
+    "title_hi": "Railway नई भर्ती",
+    "title_en": "Railway New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-28",
+    "apply": "https://indianrailways.gov.in",
+    "details_hi": "Railway से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from Railway"
+  },
+  {
+    "id": "private-jobs-2025-12-28",
+    "title_hi": "Private Jobs नई भर्ती",
+    "title_en": "Private Jobs New Recruitment",
+    "type": "private",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-28",
+    "apply": "https://www.naukri.com",
+    "details_hi": "Private Jobs से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from Private Jobs"
   }
 ]
