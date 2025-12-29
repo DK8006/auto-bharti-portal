@@ -1,9 +1,9 @@
-name: Auto Update Jobs from Telegram
+name: Auto Fetch Telegram Jobs
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 */6 * * *"   # har 6 ghante
-  workflow_dispatch:
 
 jobs:
   scrape:
@@ -16,23 +16,24 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.10"
 
       - name: Install libraries
         run: |
-          pip install telethon requests beautifulsoup4
+          pip install telethon requests
 
       - name: Run Telegram Job Bot
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         run: |
           python telegram_bot.py
 
       - name: Commit & Push Updates
         run: |
-          git config --global user.name "job-bot"
-          git config --global user.email "bot@github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
           git add jobs.json
           git commit -m "Auto update jobs" || echo "No changes"
           git push
