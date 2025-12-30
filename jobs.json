@@ -1,36 +1,67 @@
-fetch("jobs.json")
-  .then(res => res.json())
-  .then(jobs => {
-    const sarkariDiv = document.getElementById("sarkari");
-    const otherDiv = document.getElementById("other");
-
-    if (!jobs || jobs.length === 0) {
-      sarkariDiv.innerHTML = "<p>No jobs available</p>";
-      otherDiv.innerHTML = "";
-      return;
-    }
-
-    jobs.forEach(job => {
-      const card = document.createElement("div");
-      card.className = "job-card";
-
-      card.innerHTML = `
-        <div class="job-title">${job.title}</div>
-        <div>Department: <b>${job.department}</b></div>
-        <div>Post: <b>${job.post}</b></div>
-        <div class="last-date">Last Date: ${job.last_date || "Check Notification"}</div>
-        <a class="view-btn" href="${job.link}" target="_blank">View Details</a>
-      `;
-
-      if (job.source === "SarkariResultOfficial") {
-        sarkariDiv.appendChild(card);
-      } else {
-        otherDiv.appendChild(card);
-      }
-    });
-  })
-  .catch(err => {
-    document.getElementById("sarkari").innerHTML =
-      "<p>Error loading jobs</p>";
-    console.error(err);
-  });
+[
+  {
+    "id": "up-police-2025-12-30",
+    "title_hi": "UP Police नई भर्ती",
+    "title_en": "UP Police New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-30",
+    "apply": "https://uppbpb.gov.in",
+    "details_hi": "UP Police से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from UP Police"
+  },
+  {
+    "id": "upsssc-2025-12-30",
+    "title_hi": "UPSSSC नई भर्ती",
+    "title_en": "UPSSSC New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-30",
+    "apply": "https://upsssc.gov.in",
+    "details_hi": "UPSSSC से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from UPSSSC"
+  },
+  {
+    "id": "ssc-2025-12-30",
+    "title_hi": "SSC नई भर्ती",
+    "title_en": "SSC New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-30",
+    "apply": "https://ssc.nic.in",
+    "details_hi": "SSC से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from SSC"
+  },
+  {
+    "id": "railway-2025-12-30",
+    "title_hi": "Railway नई भर्ती",
+    "title_en": "Railway New Recruitment",
+    "type": "government",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-30",
+    "apply": "https://indianrailways.gov.in",
+    "details_hi": "Railway से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from Railway"
+  },
+  {
+    "id": "private-jobs-2025-12-30",
+    "title_hi": "Private Jobs नई भर्ती",
+    "title_en": "Private Jobs New Recruitment",
+    "type": "private",
+    "qualification": "10th / 12th / Graduate",
+    "age": "18-35",
+    "salary": "As per rules",
+    "lastDate": "2025-12-30",
+    "apply": "https://www.naukri.com",
+    "details_hi": "Private Jobs से नई भर्ती auto add हुई है",
+    "details_en": "Auto-added job from Private Jobs"
+  }
+]
