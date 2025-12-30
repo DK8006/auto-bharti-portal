@@ -1,19 +1,17 @@
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #f2f4f7;
+  background: #f5f5f5;
+  margin: 0;
 }
 
 .top {
-  background: #b71c1c;
+  background: #c62828;
   color: white;
   padding: 15px;
   text-align: center;
 }
 
 .container {
-  max-width: 900px;
-  margin: auto;
   padding: 15px;
 }
 
@@ -27,38 +25,31 @@ body {
 .job-card {
   background: white;
   padding: 15px;
-  margin-top: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 12px 0;
+  border-left: 5px solid #c62828;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.job-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #0d47a1;
+.job-card h3 {
+  margin: 0 0 5px;
+  color: #333;
 }
 
-.badge {
+.job-card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.job-card a {
   display: inline-block;
-  background: #198754;
-  color: white;
-  padding: 3px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-  margin-top: 5px;
-}
-
-.last-date {
-  color: #d32f2f;
-  font-weight: bold;
-}
-
-.view-btn {
-  display: inline-block;
-  margin-top: 10px;
-  background: #0d6efd;
+  margin-top: 8px;
+  background: #c62828;
   color: white;
   padding: 6px 12px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 4px;
+}
+
+.job-card a:hover {
+  background: #a91d1d;
 }
