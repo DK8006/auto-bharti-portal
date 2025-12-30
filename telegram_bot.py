@@ -4,7 +4,31 @@ import re
 import asyncio
 from datetime import datetime
 from telethon import TelegramClient
-from telethon.tl.functions.messages import GetHistoryRequest
+from telethon.tl.functions.messages 
+import GetHistoryRequest
+from datetime import datetime
+
+def normalize_date(date_str):
+    if not date_str:
+        return "Check Notification"
+
+    date_str = date_str.strip()
+
+    formats = [
+        "%d-%m-%Y",
+        "%d/%m/%Y",
+        "%Y-%m-%d",
+        "%d %b %Y",
+        "%d %B %Y"
+    ]
+
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_str, fmt).strftime("%d-%m-%Y")
+        except:
+            pass
+
+    return "Check Notification"
 
 # ================== ENV ==================
 API_ID = int(os.getenv("TG_API_ID", "0"))
@@ -66,12 +90,18 @@ def parse_job(text: str):
             break
 
     # Last Date
-    last_date = ""
-    m = re.search(r"(\d{1,2}[/-]\d{1,2}[/-]\d{4})", text)
-    if m:
-        last_date = m.group(1)
+last_date = "Check Notification"
 
-    return department, post, last_date
+patterns = [
+    r"(\d{1,2}[/-]\d{1,2}[/-]\d{4})",
+    r"(\d{1,2}\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s\d{4})"
+]
+
+for p in patterns:
+    m = re.search(p, text, re.IGNORECASE)
+    if m:
+        last_date = normalize_date(m.group(1))
+        break
 
 # ================== MAIN ==================
 async def main():
