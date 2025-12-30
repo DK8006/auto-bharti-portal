@@ -1,65 +1,25 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Bharti Portal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body{margin:0;font-family:Arial;background:#f2f2f2}
-header{background:#0d6efd;color:white;padding:12px;text-align:center}
-select{width:95%;padding:8px;margin:10px}
-.job{background:white;margin:10px;padding:10px;border-radius:6px}
-.job h3{margin:0 0 6px 0}
-.job a{display:inline-block;margin-top:6px;color:#0d6efd}
-</style>
+  <meta charset="UTF-8">
+  <title>Bharti Portal</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-  <h2>Latest Bharti</h2>
-</header>
+  <header class="top">
+    <h1>📢 Sarkari Bharti Portal</h1>
+    <p>Latest Govt Jobs – Auto Updated</p>
+  </header>
 
-<select id="deptFilter">
-  <option value="">All Department</option>
-  <option value="SSC">SSC</option>
-  <option value="Railway">Railway</option>
-  <option value="Police">Police</option>
-</select>
+  <div class="container">
+    <h2 class="section-title">Sarkari Result Jobs</h2>
+    <div id="sarkari-jobs"></div>
 
-<div id="jobs">Loading...</div>
+    <h2 class="section-title">Other Govt Jobs</h2>
+    <div id="other-jobs"></div>
+  </div>
 
-<script>
-const jobsDiv = document.getElementById("jobs");
-const filter = document.getElementById("deptFilter");
-
-fetch("jobs.json")
-.then(res => res.json())
-.then(data => {
-  function showJobs(){
-    let html = "";
-    let dept = filter.value;
-
-    data.forEach(j => {
-      if(!dept || j.department.includes(dept)){
-        html += `
-        <div class="job">
-          <h3>${j.exam_name}</h3>
-          <p><b>Department:</b> ${j.department}</p>
-          <p><b>Last Date:</b> ${j.last_date}</p>
-          <a href="job.html?id=${j.id}">View Full Details</a>
-        </div>`;
-      }
-    });
-
-    jobsDiv.innerHTML = html || "No jobs available";
-  }
-
-  filter.onchange = showJobs;
-  showJobs();
-});
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
